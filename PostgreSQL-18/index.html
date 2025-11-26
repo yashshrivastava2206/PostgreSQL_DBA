@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostgreSQL 18 Complete Feature Guide</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+        
+        .cover {
+            text-align: center;
+            padding: 100px 20px;
+            page-break-after: always;
+        }
+        
+        .cover h1 {
+            font-size: 42px;
+            color: #336791;
+            margin-bottom: 20px;
+        }
+        
+        .cover .subtitle {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .cover .version {
+            font-size: 18px;
+            color: #999;
+        }
+        
+        h1 {
+            color: #336791;
+            border-bottom: 3px solid #336791;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            page-break-before: always;
+        }
+        
+        h2 {
+            color: #4A90E2;
+            margin-top: 30px;
+            font-size: 24px;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            border-left: 4px solid #336791;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 4px;
+            font-size: 13px;
+            page-break-inside: avoid;
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        .example {
+            background-color: #e8f4f8;
+            border-left: 4px solid #4A90E2;
+            padding: 15px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        
+        .benefit {
+            background-color: #e8f8e8;
+            border-left: 4px solid #5cb85c;
+            padding: 15px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #336791;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .toc {
+            page-break-after: always;
+        }
+        
+        .toc h2 {
+            color: #336791;
+            border-bottom: 2px solid #336791;
+            padding-bottom: 10px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+        
+        .toc a {
+            color: #336791;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        .download-btn {
+            background-color: #336791;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .download-btn:hover {
+            background-color: #2a5478;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <h1>PostgreSQL 18</h1>
+        <div class="subtitle">Complete Feature Guide with Examples</div>
+        <div class="version">Version 18 | 2025 Release</div>
+        <p style="margin-top: 60px; font-size: 16px; color: #666;">
+            A comprehensive guide to all major features, improvements,<br>
+            and enhancements in PostgreSQL 18
+        </p>
+    </div>
+    
+    <button class="download-btn no-print" onclick="window.print()">📄 Download as PDF</button>
+    
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li>1. Async I/O – Up to 3× Faster Reads</li>
+            <li>2. Smarter Query Planning – Skip Scans</li>
+            <li>3. Easier Upgrades – Planner Stats Preservation</li>
+            <li>4. Faster pg_upgrade – Parallel Checks</li>
+            <li>5. Virtual Generated Columns</li>
+            <li>6. OLD/NEW in RETURNING Clause</li>
+            <li>7. Enhanced EXPLAIN with Buffer Usage</li>
+            <li>8. Security Refresh – OAuth 2.0</li>
+            <li>9. Smarter Replication</li>
+            <li>10. Maintenance Updates</li>
+            <li>11. What It Means for Developers</li>
+            <li>12. Summary of Key Improvements</li>
+        </ul>
+    </div>
+
+    <h1>1. Async I/O – Up to 3× Faster Reads</h1>
+    
+    <p>PostgreSQL 18 introduces asynchronous I/O that allows the database to queue multiple read requests concurrently instead of waiting for each to complete sequentially, demonstrating up to three times performance improvements for read operations.</p>
+    
+    <h3>How It Works</h3>
+    <ul>
+        <li><strong>Before (Synchronous):</strong> Database reads one block, waits for it to complete, then reads the next</li>
+        <li><strong>After (Asynchronous):</strong> Database sends multiple read requests at once and processes data as it arrives</li>
+    </ul>
+    
+    <div class="example">
+        <h3>Configuration Example</h3>
+        <pre><code>-- Check current I/O method
+SHOW io_method;
+
+-- Available options:
+-- 'sync' - old synchronous behavior (PostgreSQL 17 style)
+-- 'worker' - uses background I/O worker processes (default in PG18)
+-- 'io_uring' - uses Linux io_uring for best performance
+
+-- Configure for maximum performance (requires restart)
+ALTER SYSTEM SET io_method = 'io_uring';  -- Linux only
+ALTER SYSTEM SET io_workers = 4;
+
+-- View asynchronous I/O activity
+SELECT * FROM pg_aios;</code></pre>
+    </div>
+    
+    <div class="benefit">
+        <h3>Real-World Impact</h3>
+        <p>In benchmark tests, asynchronous I/O showed disk throughput improvements from around 2.6 GB/sec with synchronous I/O to 3.4 GB/sec with io_uring, particularly beneficial for large sequential scans and bitmap heap scans.</p>
+    </div>
+
+    <h1>2. Smarter Query Planning – Skip Scans</h1>
+    
+    <p>PostgreSQL 18 introduces skip scan optimization that allows multicolumn B-tree indexes to be used efficiently even when queries omit equality conditions on the leading columns.</p>
+    
+    <div class="warning">
+        <h3>The Problem Before PG18</h3>
+        <p>If you had an index on <code>(region, category, date)</code> and queried only by <code>category</code> and <code>date</code> without specifying <code>region</code>, PostgreSQL couldn't use the index efficiently.</p>
+    </div>
+    
+    <div class="example">
+        <h3>Example</h3>
+        <pre><code>-- Create a multicolumn index
+CREATE TABLE sales (
+    region VARCHAR(50),
+    category VARCHAR(100),
+    sale_date DATE,
+    amount DECIMAL(10,2)
+);
+
+CREATE INDEX idx_sales_analytics 
+ON sales(region, category, sale_date);
+
+-- Query WITHOUT specifying the leading column (region)
+-- In PG17: Would likely do sequential scan
+-- In PG18: Uses skip scan optimization!
+SELECT * FROM sales 
+WHERE category = 'Electronics' 
+  AND sale_date > '2024-01-01';</code></pre>
+    </div>
+    
+    <h3>When Skip Scan Works Best</h3>
+    <p>The optimization is most effective when the omitted leading columns have low cardinality with few distinct values, as the planner internally generates searches for each possible value.</p>
+    
+    <div class="example">
+        <h3>Practical Example with Low Cardinality</h3>
+        <pre><code>CREATE TABLE orders (
+    status VARCHAR(20),  -- Only: 'pending', 'shipped', 'delivered'
+    customer_id INT,
+    order_date DATE
+);
+
+CREATE INDEX idx_orders ON orders(status, customer_id, order_date);
+
+-- Efficiently uses the index even without 'status'
+SELECT * FROM orders 
+WHERE customer_id = 101 
+  AND order_date > '2024-01-01';</code></pre>
+    </div>
+
+    <h1>3. Easier Upgrades – Planner Stats Preservation</h1>
+    
+    <p>PostgreSQL 18 introduces the ability to preserve planner statistics during major version upgrades, eliminating the need for lengthy post-upgrade ANALYZE operations.</p>
+    
+    <h3>The Problem Before</h3>
+    <p>After upgrading from PG16 to PG17, you had to run <code>ANALYZE</code> on all tables to regenerate statistics. On large databases, this could take hours or days, and queries would perform poorly until completed.</p>
+    
+    <div class="example">
+        <h3>Upgrade Process</h3>
+        <pre><code>-- Before PG18 upgrade process:
+pg_upgrade --old-datadir=/var/lib/postgresql/17/data \
+           --new-datadir=/var/lib/postgresql/18/data \
+           --old-bindir=/usr/lib/postgresql/17/bin \
+           --new-bindir=/usr/lib/postgresql/18/bin
+
+-- After upgrade in PG17: HAD to run (could take hours!)
+vacuumdb --all --analyze-in-stages
+
+-- With PG18: Statistics preserved automatically!
+-- Queries perform well immediately after upgrade</code></pre>
+    </div>
+
+    <h1>4. Faster pg_upgrade – Parallel Checks</h1>
+    
+    <p>PostgreSQL 18 enhances pg_upgrade with parallel processing of checks using the existing --jobs flag and adds a --swap option that swaps upgrade directories instead of copying, cloning, or linking files.</p>
+    
+    <div class="example">
+        <h3>Upgrade Commands</h3>
+        <pre><code>-- Old way (slower):
+pg_upgrade --old-datadir=/old/data \
+           --new-datadir=/new/data \
+           --check
+
+-- New way with parallel checks (much faster):
+pg_upgrade --old-datadir=/old/data \
+           --new-datadir=/new/data \
+           --jobs=4 \
+           --check
+
+-- Fastest upgrade using --swap:
+pg_upgrade --old-datadir=/old/data \
+           --new-datadir=/new/data \
+           --jobs=4 \
+           --swap</code></pre>
+    </div>
+    
+    <div class="benefit">
+        <h3>Benefits</h3>
+        <ul>
+            <li>Parallel checks speed up pre-upgrade validation</li>
+            <li><code>--swap</code> option can be the fastest upgrade mode</li>
+            <li>Especially beneficial for databases with many tables</li>
+        </ul>
+    </div>
+
+    <h1>5. Virtual Generated Columns</h1>
+    
+    <p>PostgreSQL 18 makes virtual generated columns the default, computing values at query time instead of storing them on disk.</p>
+    
+    <div class="example">
+        <h3>Virtual vs Stored Columns</h3>
+        <pre><code>-- Virtual generated column (NEW DEFAULT in PG18)
+CREATE TABLE user_profiles (
+    user_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    -- Computed on read, no disk storage
+    full_name VARCHAR(200) GENERATED ALWAYS AS 
+        (first_name || ' ' || last_name) VIRTUAL
+);
+
+-- Stored generated column (explicit if needed)
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    base_price DECIMAL(10,2),
+    discount_rate DECIMAL(3,2),
+    tax_rate DECIMAL(3,2),
+    -- Computed on write, stored on disk
+    final_price DECIMAL(10,2) GENERATED ALWAYS AS 
+        (base_price * (1 - discount_rate) * (1 + tax_rate)) STORED
+);</code></pre>
+    </div>
+    
+    <div class="example">
+        <h3>JSON Extraction Example</h3>
+        <pre><code>CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    settings JSONB,
+    -- Extract username from JSON on-the-fly
+    username VARCHAR(100) GENERATED ALWAYS AS 
+        (settings ->> 'username') VIRTUAL
+);
+
+INSERT INTO users(settings) VALUES 
+    ('{"username": "john_doe", "theme": "dark"}');
+
+SELECT user_id, username FROM users;</code></pre>
+    </div>
+    
+    <div class="benefit">
+        <h3>When to Use Each Type</h3>
+        <ul>
+            <li><strong>Virtual:</strong> No disk space, faster writes, always up-to-date</li>
+            <li><strong>Stored:</strong> Can be indexed, can be replicated</li>
+            <li><strong>Use virtual for:</strong> Derived values, JSON extraction, formatting</li>
+            <li><strong>Use stored for:</strong> Values you need to index or replicate</li>
+        </ul>
+    </div>
+
+    <h1>6. OLD/NEW in RETURNING Clause</h1>
+    
+    <p>PostgreSQL 18 adds the capability to access both previous (OLD) and current (NEW) values in the RETURNING clause for INSERT, UPDATE, DELETE, and MERGE commands.</p>
+    
+    <div class="example">
+        <h3>UPDATE with OLD and NEW Values</h3>
+        <pre><code>CREATE TABLE inventory (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100),
+    quantity INT,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- UPDATE with OLD and NEW values
+UPDATE inventory 
+SET quantity = quantity - 10 
+WHERE product_name = 'Widget A'
+RETURNING 
+    product_id,
+    OLD.quantity AS previous_quantity,
+    NEW.quantity AS current_quantity,
+    (NEW.quantity - OLD.quantity) AS change;
+
+-- Output:
+-- product_id | previous_quantity | current_quantity | change
+-- -----------+-------------------+------------------+--------
+--          1 |               100 |               90 |    -10</code></pre>
+    </div>
+    
+    <div class="example">
+        <h3>DELETE with OLD Values</h3>
+        <pre><code>DELETE FROM inventory 
+WHERE quantity < 60
+RETURNING 
+    OLD.product_name,
+    OLD.quantity AS final_quantity;</code></pre>
+    </div>
+    
+    <div class="benefit">
+        <h3>Use Cases</h3>
+        <ul>
+            <li>Audit logging (capture before and after)</li>
+            <li>Calculating deltas in one query</li>
+            <li>Trigger-like behavior without triggers</li>
+            <li>Simplified change tracking</li>
+        </ul>
+    </div>
+
+    <h1>7. Enhanced EXPLAIN with Buffer Usage</h1>
+    
+    <p>PostgreSQL 18 automatically shows buffer usage when executing EXPLAIN ANALYZE, and EXPLAIN ANALYZE VERBOSE now includes CPU, WAL, and average read statistics.</p>
+    
+    <div class="example">
+        <h3>Before and After</h3>
+        <pre><code>-- Before PG18: Had to explicitly request
+EXPLAIN (ANALYZE, BUFFERS) 
+SELECT * FROM large_table WHERE id > 1000;
+
+-- In PG18: Buffer info shown automatically!
+EXPLAIN ANALYZE 
+SELECT * FROM large_table WHERE id > 1000;
+
+-- Output now includes:
+-- Planning Time: 0.123 ms
+-- Execution Time: 45.678 ms
+-- Buffers: shared hit=150 read=25  <-- NEW!
+
+-- Detailed view with even more info:
+EXPLAIN (ANALYZE, VERBOSE) 
+SELECT * FROM large_table WHERE id > 1000;</code></pre>
+    </div>
+    
+    <div class="benefit">
+        <h3>What You Can Learn</h3>
+        <ul>
+            <li><strong>shared hit:</strong> Data found in memory - GOOD</li>
+            <li><strong>shared read:</strong> Had to read from disk - potentially slow</li>
+            <li><strong>Index lookups:</strong> How many index entries checked</li>
+            <li><strong>CPU time:</strong> Processing time spent</li>
+            <li><strong>WAL bytes:</strong> Amount of write-ahead log generated</li>
+        </ul>
+    </div>
+
+    <h1>8. Security Refresh – OAuth 2.0</h1>
+    
+    <p>PostgreSQL 18 introduces OAuth 2.0 authentication allowing integration with modern identity providers, and deprecates MD5 password authentication in favor of SCRAM-SHA-256.</p>
+    
+    <div class="example">
+        <h3>OAuth 2.0 Configuration</h3>
+        <pre><code>-- 1. Configure in pg_hba.conf
+host    all    all    0.0.0.0/0    oauth
+
+-- 2. Set OAuth validator in postgresql.conf
+oauth_validator_libraries = 'myoauth_validator'
+
+-- 3. Configure TLS 1.3 ciphers
+ssl_tls13_ciphers = 'TLS_AES_256_GCM_SHA384'
+
+-- 4. Connect using OAuth
+psql "host=mydb.example.com \
+      dbname=myapp \
+      user=myuser \
+      oauth_bearer_token=eyJhbGciOiJSUzI1NiIs..."</code></pre>
+    </div>
+    
+    <div class="example">
+        <h3>Security Improvements</h3>
+        <pre><code>-- MD5 is now DEPRECATED
+-- Old (discouraged):
+CREATE ROLE old_user WITH PASSWORD 'password';
+
+-- New (recommended - uses SCRAM-SHA-256):
+CREATE ROLE new_user WITH PASSWORD 'password';
+
+-- Page checksums enabled by default
+initdb -D /var/lib/postgresql/data</code></pre>
+    </div>
+
+    <h1>9. Smarter Replication</h1>
+    
+    <p>PostgreSQL 18 defaults to parallel streaming for CREATE SUBSCRIPTION and reports logical replication write conflicts in logs and the pg_stat_subscription_stats view.</p>
+    
+    <div class="example">
+        <h3>Replication Configuration</h3>
+        <pre><code>-- Parallel streaming is now default!
+CREATE SUBSCRIPTION my_subscription
+    CONNECTION 'host=primary.example.com dbname=mydb'
+    PUBLICATION my_publication
+    WITH (streaming = parallel);
+
+-- Monitor replication conflicts
+SELECT * FROM pg_stat_subscription_stats;
+
+-- Replicate generated columns (NEW!)
+CREATE PUBLICATION pub_with_generated 
+FOR TABLE products 
+WITH (publish_generated_columns = 'stored');</code></pre>
+    </div>
+    
+    <div class="benefit">
+        <h3>Benefits</h3>
+        <ul>
+            <li><strong>Parallel streaming:</strong> Faster replication for large transactions</li>
+            <li><strong>Conflict detection:</strong> See write conflicts immediately</li>
+            <li><strong>Generated columns:</strong> Can now replicate calculated values</li>
+            <li><strong>Auto cleanup:</strong> Idle replication slots automatically managed</li>
+        </ul>
+    </div>
+
+    <h1>10. Maintenance Updates</h1>
+    
+    <p>PostgreSQL 18 enables page checksums by default in new clusters, improves vacuum strategy by proactively freezing pages, and adds detailed statistics about vacuum and analyze operations.</p>
+    
+    <div class="example">
+        <h3>Maintenance Features</h3>
+        <pre><code>-- Check checksum status
+SELECT name, setting FROM pg_settings 
+WHERE name = 'data_checksums';
+
+-- Improved VACUUM behavior
+VACUUM VERBOSE my_table;
+
+-- View enhanced vacuum statistics
+SELECT schemaname, relname, 
+       last_vacuum, last_autovacuum,
+       vacuum_count, autovacuum_count,
+       n_tup_ins, n_tup_upd, n_tup_del,
+       n_live_tup, n_dead_tup
+FROM pg_stat_all_tables 
+WHERE schemaname = 'public';</code></pre>
+    </div>
+    
+    <div class="benefit">
+        <h3>Benefits</h3>
+        <ul>
+            <li><strong>Page checksums:</strong> Detect data corruption early</li>
+            <li><strong>Smarter vacuum:</strong> More efficient freeze operations</li>
+            <li><strong>Better monitoring:</strong> More detailed statistics</li>
+            <li><strong>Per-connection stats:</strong> See I/O and WAL per session</li>
+        </ul>
+    </div>
+
+    <h1>11. What It Means for Developers</h1>
+    
+    <h3>Performance Wins (Almost Free)</h3>
+    <div class="example">
+        <pre><code>-- Your existing queries may run 2-3x faster
+-- No code changes needed!
+SELECT * FROM large_table WHERE condition = true;</code></pre>
+    </div>
+    
+    <h3>Simpler Schema Design</h3>
+    <div class="example">
+        <pre><code>-- Use virtual columns instead of triggers
+CREATE TABLE orders (
+    subtotal DECIMAL(10,2),
+    tax_rate DECIMAL(3,2),
+    total DECIMAL(10,2) GENERATED ALWAYS AS 
+        (subtotal * (1 + tax_rate)) VIRTUAL
+);</code></pre>
+    </div>
+    
+    <h3>Better Debugging</h3>
+    <div class="example">
+        <pre><code>-- See exactly what's slow
+EXPLAIN ANALYZE SELECT ...;
+-- Now shows buffer hits, reads, CPU automatically</code></pre>
+    </div>
+    
+    <h3>Modern Authentication</h3>
+    <p>Integrate with your SSO (Okta, Auth0, etc.) and support OAuth 2.0 for secure API access.</p>
+    
+    <h3>Safer Upgrades</h3>
+    <div class="example">
+        <pre><code>-- Upgrade with minimal downtime
+pg_upgrade --jobs=4 --swap</code></pre>
+    </div>
+    
+    <h3>Easier Auditing</h3>
+    <div class="example">
+        <pre><code>-- Track changes in one query
+UPDATE users SET balance = balance - 100 
+WHERE user_id = 123
+RETURNING OLD.balance, NEW.balance;</code></pre>
+    </div>
+
+    <h1>12. Summary of Key Improvements</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Benefit</th>
+                <th>Performance Gain</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Async I/O</td>
+                <td>Faster disk reads</td>
+                <td>Up to 3× faster</td>
+            </tr>
+            <tr>
+                <td>Skip Scan</td>
+                <td>Use multicolumn indexes better</td>
+                <td>Up to 100× in some cases</td>
+            </tr>
+            <tr>
+                <td>Stats Preservation</td>
+                <td>Faster upgrades</td>
+                <td>Hours saved</td>
+            </tr>
+            <tr>
+                <td>Parallel pg_upgrade</td>
+                <td>Faster migration</td>
+                <td>2-4× faster checks</td>
+            </tr>
+            <tr>
+                <td>Virtual Columns</td>
+                <td>Less disk space, flexible schemas</td>
+                <td>Faster writes</td>
+            </tr>
+            <tr>
+                <td>OLD/NEW in RETURNING</td>
+                <td>Simpler change tracking</td>
+                <td>Fewer queries needed</td>
+            </tr>
+            <tr>
+                <td>Enhanced EXPLAIN</td>
+                <td>Better debugging</td>
+                <td>Developer time saved</td>
+            </tr>
+            <tr>
+                <td>OAuth 2.0</td>
+                <td>Modern authentication</td>
+                <td>Better security</td>
+            </tr>
+            <tr>
+                <td>Parallel Streaming</td>
+                <td>Faster replication</td>
+                <td>Higher throughput</td>
+            </tr>
+            <tr>
+                <td>Page Checksums</td>
+                <td>Data integrity</td>
+                <td>Catch corruption early</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="footer">
+        <p><strong>PostgreSQL 18 represents a major leap forward in performance, developer experience, and operational simplicity!</strong></p>
+        <p>© 2025 PostgreSQL Community | This guide is for educational purposes</p>
+        <p>For official documentation, visit: postgresql.org/docs/18</p>
+    </div>
+    
+    <script>
+        // Add print functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtn = document.querySelector('.download-btn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    window.print();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
