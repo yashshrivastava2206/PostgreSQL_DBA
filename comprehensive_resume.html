@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Shrivastava - Database Administrator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        
+        .header .title {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .contact-info div {
+            font-size: 0.95em;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .content {
+            padding: 40px 50px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #1e3c72;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .summary {
+            font-size: 1.05em;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        
+        .experience-item, .education-item, .project-item {
+            margin-bottom: 25px;
+        }
+        
+        .experience-item h3, .education-item h3, .project-item h3 {
+            color: #2a5298;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        
+        .experience-item .company, .education-item .institution {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .experience-item .duration, .education-item .duration, .project-item .tech {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .experience-item ul, .project-item ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .experience-item li, .project-item li {
+            margin-bottom: 6px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .skill-category {
+            margin-bottom: 15px;
+        }
+        
+        .skill-category h4 {
+            color: #1e3c72;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .skill-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 5px;
+            border-left: 4px solid #2a5298;
+        }
+        
+        .skill-item strong {
+            color: #1e3c72;
+        }
+        
+        .extensions-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .extension-tag {
+            background: #e8f4f8;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #1e3c72;
+        }
+        
+        .certifications-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .cert-item {
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        
+        .patent-box {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #2a5298;
+        }
+        
+        .patent-box h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+        
+        .patent-box .app-no {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .achievements-list {
+            list-style: none;
+        }
+        
+        .achievements-list li {
+            padding: 10px;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #2a5298;
+        }
+        
+        .responsibilities-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header, .content {
+                padding: 30px 25px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid, .certifications-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>YASH SHRIVASTAVA</h1>
+            <div class="title">Database Administrator | PostgreSQL & MySQL Specialist</div>
+            <div class="contact-info">
+                <div>📧 yash.shrivastava.2206@gmail.com</div>
+                <div>📱 +91 7237092938</div>
+                <div>📍 Noida, Uttar Pradesh, India</div>
+                <div>💼 <a href="https://www.linkedin.com/in/yash-shrivastava-8388561a0">LinkedIn Profile</a></div>
+                <div>🔗 <a href="https://github.com/yashshrivastava2206">GitHub Profile</a></div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Professional Summary</h2>
+                <p class="summary">
+                    Results-driven Database Administrator with 2+ years of hands-on expertise in PostgreSQL and MySQL administration, performance optimization, high-availability setups, and end-to-end database lifecycle management. Strong programming capability in Java, Shell scripting, and Linux, enabling automation of routine tasks, building efficient tools, and improving database reliability. Proven track record in database migrations, disaster recovery planning, backup & restore strategies, replication configuration, monitoring, and tuning slow queries. Optimized PostgreSQL queries improving execution time by 30%, managed backup and restore operations reducing recovery time by 40%, and enhanced system reliability through proactive performance monitoring. Combines DBA expertise with engineering mindset—resulting in clean solutions, reduced downtime, and better system performance. Core strengths include ownership mindset, strong problem-solving, automation-first thinking, and effective cross-functional collaboration.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <h3>Database Administrator</h3>
+                    <div class="company">ANR Software Pvt. Ltd., Noida, Uttar Pradesh</div>
+                    <div class="duration">January 2025 - Present</div>
+                    <ul>
+                        <li>Manage end-to-end administration of PostgreSQL and MySQL environments including installation, configuration, patching, and upgrades</li>
+                        <li>Design and manage backup & recovery strategies with PITR, logical/physical backups, and automated restore validation</li>
+                        <li>Perform performance tuning through query optimization, indexing strategies, and execution plan analysis</li>
+                        <li>Set up and maintain streaming and logical replication with comprehensive failover planning</li>
+                        <li>Execute database migrations with minimal downtime ensuring data integrity</li>
+                        <li>Build automation scripts using Shell scripting to streamline DBA tasks</li>
+                        <li>Implement monitoring solutions using Grafana & Zabbix for logs, performance metrics, and alerting systems</li>
+                        <li>Collaborate with development teams to optimize schema design and query patterns</li>
+                        <li>Manage tablespace operations, VACUUM processes, and TOAST table handling</li>
+                        <li>Monitor replication lag, process & lock monitoring, and generate performance reports</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Database Administrator Trainee</h3>
+                    <div class="company">ANR Software Pvt. Ltd., Noida, Uttar Pradesh</div>
+                    <div class="duration">January 2024 - January 2025</div>
+                    <ul>
+                        <li>Learned and applied core DBA concepts under senior mentorship</li>
+                        <li>Assisted in database maintenance, backup operations, and monitoring</li>
+                        <li>Participated in performance tuning exercises and troubleshooting</li>
+                        <li>Gained hands-on experience with replication setup and disaster recovery</li>
+                        <li>Optimized PostgreSQL queries, improving execution time by 30%</li>
+                        <li>Managed backup, restore, and replication, reducing recovery time by 40%</li>
+                        <li>Upgraded systems, leading to 20% fewer downtime incidents</li>
+                        <li>Enhanced security by configuring authentication & enabling secure remote access</li>
+                        <li>Monitored performance detecting anomalies 15% faster using Grafana & Zabbix</li>
+                        <li>Deployed Redmine and conducted database migration projects</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Cyber Security Virtual Internship</h3>
+                    <div class="company">Cisco, Remote</div>
+                    <div class="duration">May 2023 - August 2023</div>
+                    <ul>
+                        <li>Gained exposure to security fundamentals and log analysis</li>
+                        <li>Learned network monitoring and vulnerability identification</li>
+                        <li>Understood incident response basics and security best practices</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Key Projects</h2>
+                
+                <div class="project-item">
+                    <h3>Modernization of 300+ Non-Production PostgreSQL Databases</h3>
+                    <div class="tech">Technologies: PostgreSQL, Version Control, Ubuntu 24.03 LTS, Shell Scripting</div>
+                    <ul>
+                        <li>Executed comprehensive upgrade and migration of 300+ non-prod PostgreSQL databases</li>
+                        <li>Performed version upgrades and OS migration from CentOS to Ubuntu</li>
+                        <li>Improved security, performance, and configuration standardization across all instances</li>
+                    </ul>
+                </div>
+                
+                <div class="project-item">
+                    <h3>Centralized Monitoring Server for Production Databases</h3>
+                    <div class="tech">Technologies: PostgreSQL, Linux, Grafana, Zabbix, Database Dashboards, Log Analysis</div>
+                    <ul>
+                        <li>Designed and deployed centralized monitoring and management server for production PostgreSQL databases</li>
+                        <li>Integrated logging, health checks, and alerting systems to improve operational efficiency</li>
+                    </ul>
+                </div>
+                
+                <div class="project-item">
+                    <h3>AWS-to-Data Center & Data Center-to-AWS Migrations</h3>
+                    <div class="tech">Technologies: PostgreSQL, pgBackRest, Amazon EC2, AWS</div>
+                    <ul>
+                        <li>Executed full-scale rollback migration of AWS-hosted PostgreSQL databases to Data Center using pgBackRest pipelines</li>
+                        <li>Migrated 500 GB to 4 TB databases from on-premises to AWS with optimized storage/I/O performance</li>
+                        <li>Minimized downtime through replication-based sync and staged workflows</li>
+                    </ul>
+                </div>
+                
+                <div class="project-item">
+                    <h3>Oracle-to-PostgreSQL Migration</h3>
+                    <div class="tech">Technologies: PostgreSQL, Oracle Database, Migration Tools</div>
+                    <ul>
+                        <li>Successfully migrated 3 enterprise Oracle databases (each approx. 800 GB) to PostgreSQL</li>
+                        <li>Ensured data integrity, schema compatibility, and optimized performance post-migration</li>
+                    </ul>
+                </div>
+                
+                <div class="project-item">
+                    <h3>PostgreSQL High Availability Setup</h3>
+                    <div class="tech">Technologies: PostgreSQL, Streaming Replication, pgBackRest, Linux</div>
+                    <ul>
+                        <li>Designed and implemented robust HA setup with streaming replication and automatic failover</li>
+                        <li>Established comprehensive backup strategy ensuring 99.9% uptime</li>
+                    </ul>
+                </div>
+                
+                <div class="project-item">
+                    <h3>DBA Task Automation Framework</h3>
+                    <div class="tech">Technologies: Shell Scripting, Java, Cron, Ansible</div>
+                    <ul>
+                        <li>Built comprehensive automation framework for routine DBA tasks including backups, health checks, and alerting</li>
+                        <li>Reduced manual effort by 70% through intelligent automation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Technical Skills</h2>
+                
+                <div class="skill-category">
+                    <h4>Database Administration</h4>
+                    <div class="skills-grid">
+                        <div class="skill-item"><strong>PostgreSQL Administration:</strong> 95%</div>
+                        <div class="skill-item"><strong>MySQL Administration:</strong> 90%</div>
+                        <div class="skill-item"><strong>SQL & Query Optimization:</strong> 95%</div>
+                        <div class="skill-item"><strong>Backup & Recovery (pgBackRest):</strong> 90%</div>
+                        <div class="skill-item"><strong>Database Replication & HA:</strong> 85%</div>
+                        <div class="skill-item"><strong>Performance Tuning:</strong> 90%</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Programming & Scripting</h4>
+                    <div class="skills-grid">
+                        <div class="skill-item"><strong>Shell Scripting:</strong> 85%</div>
+                        <div class="skill-item"><strong>Java Programming:</strong> 80%</div>
+                        <div class="skill-item"><strong>Linux (Ubuntu):</strong> 90%</div>
+                        <div class="skill-item"><strong>Git & Version Control:</strong> 80%</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Tools & Frameworks</h4>
+                    <p><strong>Monitoring & Management:</strong> Grafana, Zabbix, PgAdmin</p>
+                    <p><strong>Development:</strong> React, VS Code, IntelliJ IDEA, Eclipse</p>
+                    <p><strong>Other:</strong> DBMS, OOPS, Linux Administration</p>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>PostgreSQL Extensions Expertise</h4>
+                    <div class="extensions-list">
+                        <span class="extension-tag">pgbouncer</span>
+                        <span class="extension-tag">dblink</span>
+                        <span class="extension-tag">postgis</span>
+                        <span class="extension-tag">pgaudit</span>
+                        <span class="extension-tag">pg_stat_statement</span>
+                        <span class="extension-tag">pg_buffercache</span>
+                        <span class="extension-tag">pg_cron</span>
+                        <span class="extension-tag">pg_crypto</span>
+                        <span class="extension-tag">pg_dirtyread</span>
+                        <span class="extension-tag">pg_profile</span>
+                        <span class="extension-tag">pg_stat_monitor</span>
+                        <span class="extension-tag">pg_repack</span>
+                        <span class="extension-tag">pgBackRest</span>
+                        <span class="extension-tag">postgres_fdw</span>
+                        <span class="extension-tag">plpython3u</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                
+                <div class="education-item">
+                    <h3>Master of Computer Applications (MCA)</h3>
+                    <div class="institution">KIET Group of Institutions, Ghaziabad, Uttar Pradesh</div>
+                    <div class="duration">November 2022 - July 2024 | Percentage: 81.01%</div>
+                    <p>Focused on advanced database management, algorithms, data structures, and software engineering principles. Completed projects on database optimization and system architecture.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Bachelor of Computer Applications (BCA)</h3>
+                    <div class="institution">Bundelkhand University, Jhansi, Uttar Pradesh</div>
+                    <div class="duration">August 2018 - December 2021 | Percentage: 63.75%</div>
+                    <p>Major in Computer Science and Information Technology. Built foundational knowledge in programming, databases, networking, and web development.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Professional Certifications</h2>
+                <div class="certifications-list">
+                    <div class="cert-item">✓ Linux Essentials - CISCO NetAcad (Feb 2025)</div>
+                    <div class="cert-item">✓ PostgreSQL Essential Training (Jun 2024)</div>
+                    <div class="cert-item">✓ SQL Essential Training (Jun 2024)</div>
+                    <div class="cert-item">✓ Learning Relational Databases (Jun 2024)</div>
+                    <div class="cert-item">✓ Database Foundations: Intro to Databases</div>
+                    <div class="cert-item">✓ Oracle Database 19c: Advanced SQL</div>
+                    <div class="cert-item">✓ Mastering Linux: Complete Guide</div>
+                    <div class="cert-item">✓ Linux Unhatched (Cisco)</div>
+                    <div class="cert-item">✓ Beginning Bash Scripting</div>
+                    <div class="cert-item">✓ Bash Shell Scripting Bootcamp</div>
+                    <div class="cert-item">✓ Complete SQL Bootcamp 2024</div>
+                    <div class="cert-item">✓ SQL for Data Engineers</div>
+                    <div class="cert-item">✓ Unity: MySQL Database Management</div>
+                    <div class="cert-item">✓ Java Object-Oriented Programming</div>
+                    <div class="cert-item">✓ Java: Data Structures</div>
+                    <div class="cert-item">✓ JavaScript Essentials 1 (JSE)</div>
+                    <div class="cert-item">✓ Learning Git and GitHub</div>
+                    <div class="cert-item">✓ Introduction to Cybersecurity (Cisco)</div>
+                    <div class="cert-item">✓ Cybersecurity Essentials (Cisco)</div>
+                    <div class="cert-item">✓ Partner: Cloud Security (Cisco)</div>
+                    <div class="cert-item">✓ CCNA 200-301: Network Fundamentals</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Patent</h2>
+                <div class="patent-box">
+                    <h3>ENVIROGAS: An Intelligent Biogas-Extracting Waste Bin System</h3>
+                    <div class="app-no">Application No: 202311057285 | Status: Application Awaiting Examination</div>
+                    <p>Innovation in sustainable technology combining IoT with biogas extraction capabilities. The system automatically segregates organic waste and converts it into biogas, promoting sustainable waste management and renewable energy generation.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Achievements</h2>
+                <ul class="achievements-list">
+                    <li><strong>"Employee of the Month"</strong> award at ANR Software Pvt. Ltd. (May 2024)</li>
+                    <li><strong>Runner-Up in IoT "Smart Garbage Bin"</strong> at Ideathon'23</li>
+                    <li><strong>Solved 300+ LeetCode problems</strong> demonstrating strong problem-solving skills</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Position of Responsibilities</h2>
+                <div class="responsibilities-box">
+                    <p><strong>Team Leader</strong> - The Smart Garbage Project, Ideathon'23 (KIET Group of Institutions)</p>
+                    <p>Led a team in developing an IoT-based smart waste management solution, coordinating technical development and project presentation.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Additional Information</h2>
+                <p><strong>Date of Birth:</strong> June 22, 2000 (Age: 25 years)</p>
+                <p><strong>Languages:</strong> English, Hindi</p>
+                <p><strong>Freelance Availability:</strong> Available for consulting and project work</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
